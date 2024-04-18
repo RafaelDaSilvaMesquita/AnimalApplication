@@ -1,0 +1,63 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentAnimal.id">
+        <h4>Animal</h4>
+        <div>
+            <label><strong>Nom:</strong></label> {{ currentAnimal.name }}
+        </div>
+        <div>
+            <label><strong>Espèce:</strong></label> {{ currentAnimal.breed }}
+        </div>
+    </div>
+
+<a class="badge badge-warning"
+   routerLink="/animals/{{ currentAnimal.id }}">
+   Edit
+  </a>
+</div>
+
+
+<ng-template #editable>
+    <div *ngIf="currentAnimal.id" class="edit-form">
+        <h4>Animal</h4>
+        <form>
+            <div class="form-group">
+                <label for="name">Nom</label>
+                <input
+                type="text"
+                class="form-control"
+                id="name"
+                [(ngModel)]="currentAnimal.name"
+                name="name"
+                />
+            </div>
+            <div class="form-group">
+                <label for="breed">Espèce</label>
+                <input
+                type="text"
+                class="form-control"
+                id="breed"
+                [(ngModel)]="currentAnimal.breed"
+                name="breed"
+                />
+            </div>
+        </form>
+
+        <button class="badge badge-danger mr-2" (click)="deleteAnimal()">
+            Supprimer
+        </button>
+
+        <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateAnimal()"
+        >
+            Modifier
+        </button>
+        <p>{{ message }}</p>
+    </div>
+
+    <div *ngIf="!currentAnimal.id">
+        <br />
+        <p>Vous ne pouvez pas accéder à cet animal</p>
+    </div>
+</ng-template>

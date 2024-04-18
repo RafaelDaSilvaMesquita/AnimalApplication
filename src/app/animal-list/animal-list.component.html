@@ -1,0 +1,27 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Espèce</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let animal of animals; let i = index" [class.active]="i == currentIndex" (click)="setActiveAnimal(animal, i)">
+            <td> {{ animal.id }} </td>
+            <td> {{animal.name}} </td>
+            <td> {{animal.breed}} </td>
+          </tr>
+        </tbody>
+    </table>
+    <button class="m-3 btn btn-sm btn-danger" (click)="deleteAllAnimals()">Supprime tous</button>
+    <div class="col-md-6">
+        <app-animal-details
+        [viewMode]="true"
+        [currentAnimal]="currentAnimal"
+        ></app-animal-details>
+    </div>
+  </div>
+</div>

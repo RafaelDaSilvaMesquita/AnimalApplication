@@ -1,0 +1,64 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentUser">
+        <h4>User</h4>
+        <div>
+            <label><strong>Nom:</strong></label> {{ currentUser.name }}
+        </div>
+        <div>
+            <label><strong>Email:</strong></label> {{ currentUser.email}}
+        </div>
+        <a class="badge badge-warning"
+   routerLink="/users/{{ currentUser.id }}">
+   Edit
+  </a>
+    </div>
+
+
+</div>
+
+
+<ng-template #editable>
+    <div *ngIf="currentUser" class="edit-form">
+        <h4>User</h4>
+        <form>
+            <div class="form-group">
+                <label for="name">Nom</label>
+                <input
+                type="text"
+                class="form-control"
+                id="name"
+                [(ngModel)]="currentUser.name"
+                name="name"
+                />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                type="text"
+                class="form-control"
+                id="email"
+                [(ngModel)]="currentUser.email"
+                name="email"
+                />
+            </div>
+        </form>
+
+        <button class="badge badge-danger mr-2" (click)="deleteUser()" >
+            Supprimer
+        </button>
+
+        <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateUser()"
+        >
+            Modifier
+        </button>
+        <p>{{ message }}</p>
+    </div>
+
+    <div *ngIf="!currentUser">
+        <br />
+        <p>Vous ne pouvez pas accéder à cet utilisateur</p>
+    </div>
+</ng-template>
